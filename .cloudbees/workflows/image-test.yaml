@@ -3,6 +3,10 @@ kind: workflow
 name: image-test
 on:
   workflow_dispatch:
+permissions:
+  scm-token-own: read
+  scm-token-org: read
+  id-token: write
 jobs:
   build:
     steps:
