@@ -18,5 +18,8 @@ jobs:
           role-duration-seconds: "1200"
           role-to-assume: ${{ vars.IMAGE_BUILDER_AWS_ROLE_ARN }}
       - uses: docker://268150017804.dkr.ecr.us-east-1.amazonaws.com/hackers-app/hackers-web@sha256:60b439099ff589439ac2af91a837177d54c3ee5a432980f1bad159d7bdb3d6ab
+        name: hackers-web
         run: |
+          echo "Hello from hackers-web"
+          pwd
           ls
