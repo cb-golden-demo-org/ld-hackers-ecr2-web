@@ -1,0 +1,20 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: image-test
+on:
+  push:
+    branches:
+      - "**"
+jobs:
+  build:
+    steps:
+      - name: Setup AWS API authentication
+        uses: cloudbees-io/configure-aws-credentials@v1
+        id: aws-login
+        with:
+          aws-region: ${{ vars.AWS_REGION }}
+          role-duration-seconds: "1200"
+          role-to-assume: ${{ vars.IMAGE_BUILDER_AWS_ROLE_ARN }}
+      - uses: docker://268150017804.dkr.ecr.us-east-1.amazonaws.com/hackers-app/hackers-web@sha256:60b439099ff589439ac2af91a837177d54c3ee5a432980f1bad159d7bdb3d6ab
+        run: |
+          ls
