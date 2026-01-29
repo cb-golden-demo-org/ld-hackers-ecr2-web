@@ -1,0 +1,18 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: image-test-2
+on:
+  workflow_dispatch:
+permissions:
+  scm-token-own: read
+  scm-token-org: read
+  id-token: write
+jobs:
+  build:
+    steps:
+      - uses: docker://268150017804.dkr.ecr.us-east-1.amazonaws.com/hackers-app/hackers-web@sha256:60b439099ff589439ac2af91a837177d54c3ee5a432980f1bad159d7bdb3d6ab
+        name: hackers-web
+        run: |
+          echo "Hello from hackers-web"
+          pwd
+          ls
